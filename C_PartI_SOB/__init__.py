@@ -15,8 +15,21 @@ class C(BaseConstants):
     
     Instructions_path = "_templates/global/Instructions.html"
     Quit_study_text_path = "_templates/global/Quit_study_text.html"
+    tasks_path = "_templates/global/tasks/"
 
     Return_redirect = "https://www.wikipedia.org/" #TODO: adjust redirect
+    
+    # for now only the complete tasks are listed here
+    #TODO: ensure that there is a task.html and pic for every task
+    #TODO: add all tasks
+    All_tasks = ['Anagram task', 'Ball bucket task', 'Counting numbers in matrix',
+                 'Data search task', 'Emotion recognition', 'Matrix search-summation',
+                 'Matrix word difference', 'Maze', 'MRT',
+                 'Multiplication', 'Number-in-Numbers puzzle', 'NV',
+                 'Rearrange words', 'Stock forecasting', 'Typing task',
+                 'Verify arithmetics', 'Word-in-word puzzle']
+
+
 
     
 class Subsession(BaseSubsession):
@@ -27,6 +40,9 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):   
+    # data quality
+    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page #TODO: ensure that this is added to all the pages
+    
     # Attention check 2, 1 was in introduction 
     Attention_2 = models.BooleanField(choices=[
             [True, 'I disagree.'],
@@ -35,11 +51,11 @@ class Player(BasePlayer):
         label= 'A 20 year old man can eat 500kg meat and 2 tons of vegetables in one meal.', widget=widgets.RadioSelect)
             
     # Player answers
-    ## Survey
-    Survey_1 = models.IntegerField(choices=[1,2,3,4], label='choose your Integer',
-                                   widget=widgets.RadioSelectHorizontal)
+    #TODO: should i force them to add up to 200?
+    Task1_male_FOB = models.FloatField(min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") #maybe half of the participants should answer with women?
+    Task1_female_FOB = models.FloatField(min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") #maybe half of the participants should answer with women?
     
-    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page #TODO: ensure that this is added to all the pages
+    
 
  
  #%% Base Pages
@@ -55,12 +71,12 @@ class MyBasePage(Page):
     
     @staticmethod
     def vars_for_template(player: Player):
-        return {'hidden_fields': ['bullshit'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
+        return {'hidden_fields': ['blur_event_counts'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
                 'Instructions': C.Instructions_path} 
   
 # Pages
-class MyPage(MyBasePage):
-    extra_fields = ['Survey_1'] 
+class Task1(MyBasePage):
+    extra_fields = ['Task1_male_FOB','Task1_female_FOB'] 
     form_fields = MyBasePage.form_fields + extra_fields
     
     @staticmethod
@@ -69,6 +85,9 @@ class MyPage(MyBasePage):
 
         # Add or modify variables specific to ExtendedPage
         variables['Treatment'] = player.participant.Treatment
+        task = 'Maze' #TODO: make this dynamic
+        variables['Title'] = task
+        variables['path_task'] = C.tasks_path + f'/{task}/' + task + '.html'
         return variables
 
 
@@ -82,6 +101,6 @@ class Attention_check_2(MyBasePage):
             player.participant.vars['Attention_passed'] = False
   
 page_sequence = [
-    MyPage,
+    Task1,
     Attention_check_2,
     ]

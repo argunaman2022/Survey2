@@ -26,11 +26,22 @@ class C(BaseConstants):
     
     Instructions_path = "_templates/global/Instructions.html"
     Quit_study_text_path = "_templates/global/Quit_study_text.html"
+    
+    All_tasks = ['Anagram', 'Ball-bucket', 'Spot-the-difference', 
+                'Count-numbers', 'Data-search', 'Emotion-recognition',
+                'Find-hidden-words', 'Math', 'Memory',
+                'Search-summation', 'Word-difference', 'Maze',
+                'Mental-rotation', 'Multiplication', 'Number-in-Numbers',
+                'Adding-numbers', 'Quiz', 'Rearrange-words',
+                'Stock-forecasting', 'Typing', 'Verify-arithmetics',
+                'Visual-memory','Word-in-word']
+    
     # Treatment quotas. This will be copied to the session variable.
-    #TODO: Treatments: if you dont have treatments assign everyone to the same treatment, rename it Control if you want.
     quotas = {
-    'Treatment_1': 0,
-    'Treatment_2' : 0,
+    'Male_Math': 0,
+    'Male_Memory' : 0,
+    'Female_Math': 0,
+    'Female_Memory': 0,
     }
     
 class Subsession(BaseSubsession):
@@ -48,7 +59,6 @@ def creating_session(subsession):
     subsession.session.Treatment_quotas = C.quotas.copy()
     
     for player in subsession.get_players():
-        treatment_assignment(player) #assign treatment and update quotas. Note that if the treatment
         player.participant.Allowed = True
         player.participant.Comprehension_passed = False 
             
@@ -58,26 +68,27 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Demographics
+    #TODO: make all of these fields required by removing blank=True
     prolific_id = models.StringField(default=str("None")) #prolific id, will be fetched automatically.
-    age = models.IntegerField(label="Age", min=18, max=100)
-    gender = models.StringField(label='Gender at birth',
+    age = models.IntegerField(blank=True, label="Age", min=18, max=100)
+    gender = models.StringField(blank=True, label='Gender at birth',
                                 choices=['Male', 'Female', 'Other/Prefer not to say'], widget=widgets.RadioSelect)
-    education = models.StringField(label = 'Education level',
+    education = models.StringField(blank=True, label = 'Education level',
                                    choices=['Haven’t graduated high school','GED','High school graduate','Bachelors','Masters','Professional degree (JD, MD, MBA)','Doctorate'], widget=widgets.RadioSelect) 
     # education = models.StringField(label = 'Education level',
     #                                choices=['High school or lower','Bachelors degree','Masters degree','PhD','Other'], widget=widgets.RadioSelect) 
     
-    employment = models.StringField(label='Employment status',
+    employment = models.StringField(blank=True, label='Employment status',
                                     choices=['Employed full-time', 'Employed part-time', 'Independent, or business owner', 'Out of work, or seeking work',
                                              'Student', 'Out of labor force (e.g. retired or parent raising one or more children)'], widget=widgets.RadioSelect)
-    income = models.StringField(label='Approximately, what was your <strong>total household income</strong> in the last year, before taxes?',
+    income = models.StringField(blank=True, label='Approximately, what was your <strong>total household income</strong> in the last year, before taxes?',
                             choices=['$0-$10.000', '$10.000-$20.000','$20.000-$30.000','$30.000-$40.000','$40.000-$50.000','$50.000-$60.000',
                                      '$50.000-$75.000', '$75.000-$100.000', '$100.000-$150.000', '$150.000-$200.000', '$200.000+', 'Prefer not to answer',
                                      ],)
+    
     # Data quality. 
     browser = models.StringField(blank=True) #browser used by the participant #TODO: make sure this variable is saved in the very first page (e.g. see demographics)
     blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page #TODO: ensure that this is added to all the pages
-    
     'Comprehension and attention checks'
     #whether the player got the comprehension questions rigt at the first try
     Comprehension_1 = models.BooleanField(initial=True) 
@@ -85,12 +96,13 @@ class Player(BasePlayer):
     Comprehension_wrong_answers = models.StringField(initial='') 
     Comprehension_2 = models.BooleanField(initial=True) 
     
-    Comprehension_question_1 = models.BooleanField(choices=[
+    Comprehension_question_1 = models.BooleanField( choices=[
             [True,'Correct answer'], # Correct answer here
             [False, 'False answer'],
             [False, 'False answer'],],
-        label = 'Comprehension question 1',
-        widget=widgets.RadioSelect)
+        label = 'Comprehension question 1 - Correct answer is the first one',
+        widget=widgets.RadioSelect,
+        )
     Comprehension_question_2 = models.BooleanField(choices=[
             [True,'Correct answer'], 
             [False, 'False answer'],
@@ -105,19 +117,23 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
     
     Attention_1 = models.BooleanField(choices=[
-            [False, 'Austria'],
-            [False, 'Germany'],
-            [False, 'Switzerland'],
-            [True, 'Russia'], 
-            [False, 'India'] ],
-        label='<strong>Choose the country that was described in the instructions.</strong>',
-        widget=widgets.RadioSelect)
-    
-    'if the player has decided to quit'
-    # participant_quit = models.IntegerField(initial=0) #1 for true #TODO: currently not working. Add functionality: idea if a participant has been idle for a certain amount of time, then they are considered to have quit.
+                [False, 'Canada'],
+                [False, 'USA'],
+                [False, 'Austria'],
+                [False, 'Germany'],
+                [False, 'Switzerland'],
+                [True, 'Russia'], 
+                [False, 'India'],
+                [False, 'Australia'],
+                [False, 'China'],
+                ],
+            label='Choose the country that was mentioned in the instructions above.',
+            widget=widgets.RadioSelect)
+    HoneyPot = models.StringField(label='Please fill in some sentences here', blank=True) #honeypot to catch bots
     
 #%% Functions
 def treatment_assignment(player):
+    #TODO: ensure that treatment assignment is working properly i.e. given 660 random people we have equal number of tasks (excl math memory)
     session=player.subsession.session
     Quotas = session.Treatment_quotas
     
@@ -128,20 +144,17 @@ def treatment_assignment(player):
     2. assign a random treatment from the bottom half of the quotas (i.e. the treatment with the lowest quota)
     3. update quotas accordingly.
     '''
-    treatment = random.choice([key for key, value in Quotas.items() if value in sorted(Quotas.values())[:1]])
+    Quota = random.choice([key for key, value in Quotas.items() if value in sorted(Quotas.values())[:1]])
+    #treatment equals either Math or Memory + 13 random tasks from All_tasks
+    treatment = [Quota.split('_')[1]] + random.sample(C.All_tasks, 13)
+    # randomize the items #TODO: check if it works
+    treatment = random.sample(treatment, len(treatment))
+    
     player.participant.Treatment = treatment
-    Quotas.update({treatment: Quotas[treatment]+1})
+    print('Treatment assigned:', treatment)
+    Quotas.update({Quota: Quotas[Quota]+1})
 
-def reduce_quota(player):
-    #TODO: make sure whenever a participant leaves reduce quota is applied by calling this function in places where participants might leave
-    # e.g. when participants use the "quit study button, Beware! in prolific if participants leave without using the quit study button, 
-    # your quotas will not be adjusted.
-    'if a participant quits or fails the comprehension checks, reduce the quota for that treatment'
-    session=player.subsession.session
-    Quotas = session.Treatment_quotas
-    treatment = player.participant.Treatment
-    Quotas.update({treatment: Quotas[treatment]-1})
-            
+
 # PAGES
 #%% Base Pages
 class MyBasePage(Page):
@@ -161,16 +174,18 @@ class MyBasePage(Page):
 
 #%% Pages
 
-# Demographics, Introduction, Comprehension checks and attention check 1
+#Consent, Demographics, Introduction, Comprehension checks and attention check 1
 #TODO: add quit study button to all pages
-class Demographics(MyBasePage):
-    extra_fields = ['age', 'gender', 'education', 'income','browser'] 
-    form_fields = MyBasePage.form_fields + extra_fields
-    
-    
+class Consent(Page):   
     @staticmethod
     def before_next_page(player: Player, timeout_happened=False):
         player.prolific_id = player.participant.label #save prolific id
+        treatment_assignment(player) #assign treatment and update quotas 
+        
+class Demographics(MyBasePage):
+    #TODO: add honeypot field to demographics
+    extra_fields = ['age', 'gender', 'education', 'income','browser'] 
+    form_fields = MyBasePage.form_fields + extra_fields
         
     @staticmethod
     def vars_for_template(player: Player):
@@ -181,12 +196,7 @@ class Demographics(MyBasePage):
     
 class Instructions(MyBasePage):
     pass        
-    # @staticmethod   
-    # def before_next_page(player: Player, timeout_happened=False):
-    #     if player.participant_quit:
-    #         player.participant.vars['Allowed'] = False
-    #         player.participant.Quit_study = True
-    #         reduce_quota(player)
+
             
 class Comprehension_check_1(MyBasePage):
     extra_fields = ['Comprehension_question_1', 'Comprehension_question_2', 'Comprehension_question_3']
@@ -256,7 +266,8 @@ class Attention_check_1(MyBasePage):
     def before_next_page(player: Player, timeout_happened=False):
         player.participant.vars['Attention_1'] = player.Attention_1
 
+#Add back  Demographics, Instructions,
 
-page_sequence = [Demographics, Instructions,
+page_sequence = [Consent,
                  Comprehension_check_1, Comprehension_check_2,
                  Attention_check_1]
