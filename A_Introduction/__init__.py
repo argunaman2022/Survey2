@@ -30,7 +30,7 @@ class C(BaseConstants):
     All_tasks = ['Anagram', 'Ball-bucket', 'Spot-the-difference', 
                 'Count-numbers', 'Data-search', 'Emotion-recognition',
                 'Find-hidden-words', 'Math', 'Memory',
-                'Search-summation', 'Word-difference', 'Maze',
+                'Search-summation', 'Letter-difference', 'Maze',
                 'Mental-rotation', 'Multiplication', 'Number-in-Numbers',
                 'Adding-numbers', 'Quiz', 'Rearrange-words',
                 'Stock-forecasting', 'Typing', 'Verify-arithmetics',
@@ -145,10 +145,13 @@ def treatment_assignment(player):
     3. update quotas accordingly.
     '''
     Quota = random.choice([key for key, value in Quotas.items() if value in sorted(Quotas.values())[:1]])
+    treatment = C.All_tasks.copy()
+
+    #TODO: currently all tasks are shown, make it be shown based on treatment only by uncommenting the lines below
     #treatment equals either Math or Memory + 13 random tasks from All_tasks
-    treatment = [Quota.split('_')[1]] + random.sample(C.All_tasks, 13)
-    # randomize the items #TODO: check if it works
-    treatment = random.sample(treatment, len(treatment))
+    # treatment = [Quota.split('_')[1]] + random.sample(C.All_tasks, 13)
+    # # randomize the items #TODO: check if it works
+    # treatment = random.sample(treatment, len(treatment))
     
     player.participant.Treatment = treatment
     print('Treatment assigned:', treatment)
