@@ -89,17 +89,48 @@ class Player(BasePlayer):
     Task14_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
     Task14_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
     
+    Task15_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task15_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task16_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task16_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task17_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task17_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task18_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task18_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task19_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task19_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task20_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task20_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task21_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task21_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task22_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task22_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task23_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task23_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    Task24_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
+    Task24_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    
+    
 #%% Functions
 def get_task_details(player, page_number):
     treatment = player.participant.Treatment
     task = treatment[page_number]
    
     task_row = C.Task_details.loc[C.Task_details['Name'] == task]
+    print(task_row)
     description = task_row['Task_description'].values[0]
     #TODO: make sure all pictures work
     picture_link = f"https://raw.githubusercontent.com/argunaman2022/Survey2/main/_static/Task_pictures/{task}.png"
     picture_desc = task_row['Picture_description'].values[0]
-    
     return task, description, picture_link, picture_desc
  #%% Base Pages
 class MyBasePage(Page):
@@ -114,15 +145,8 @@ class MyBasePage(Page):
     
     @staticmethod
     def vars_for_template(player: Player):
-        task, description, picture_link, picture_desc = get_task_details(player, 1)
-
         return {'hidden_fields': ['blur_event_counts'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
                 'Instructions': C.Instructions_path,
-                'Task' : task,
-                'Task_description' : description,
-                'Picture_link' : picture_link,
-                'Picture_desc' : picture_desc,
-                'Page_title' : 'Part I.', #TODO: change title
                 } 
   
 # Pages
@@ -143,6 +167,13 @@ class Task1(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 1)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task2(MyBasePage):
@@ -152,6 +183,13 @@ class Task2(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 2)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task3(MyBasePage):
@@ -161,6 +199,13 @@ class Task3(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 3)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task4(MyBasePage):
@@ -170,6 +215,13 @@ class Task4(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 4)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task5(MyBasePage):
@@ -179,6 +231,13 @@ class Task5(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 5)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task6(MyBasePage):
@@ -188,6 +247,13 @@ class Task6(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 6)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task7(MyBasePage):
@@ -197,6 +263,13 @@ class Task7(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 7)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task8(MyBasePage):
@@ -206,6 +279,13 @@ class Task8(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 8)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task9(MyBasePage):
@@ -215,6 +295,13 @@ class Task9(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 9)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task10(MyBasePage):
@@ -224,6 +311,13 @@ class Task10(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 10)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task11(MyBasePage):
@@ -233,6 +327,13 @@ class Task11(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 11)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task12(MyBasePage):
@@ -242,6 +343,13 @@ class Task12(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 12)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task13(MyBasePage):
@@ -251,6 +359,13 @@ class Task13(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 13)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task14(MyBasePage):
@@ -260,6 +375,13 @@ class Task14(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 14)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task15(MyBasePage):
@@ -269,6 +391,13 @@ class Task15(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 15)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task16(MyBasePage):
@@ -278,6 +407,13 @@ class Task16(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 16)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task17(MyBasePage):
@@ -287,6 +423,13 @@ class Task17(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 17)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task18(MyBasePage):
@@ -296,6 +439,13 @@ class Task18(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 18)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task19(MyBasePage):
@@ -305,6 +455,13 @@ class Task19(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 19)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task20(MyBasePage):
@@ -314,6 +471,13 @@ class Task20(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 20)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task21(MyBasePage):
@@ -323,6 +487,13 @@ class Task21(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 21)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task22(MyBasePage):
@@ -332,6 +503,13 @@ class Task22(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 22)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task23(MyBasePage):
@@ -341,6 +519,13 @@ class Task23(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 23)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 class Task24(MyBasePage):
@@ -350,6 +535,13 @@ class Task24(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc = get_task_details(player, 24)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = 'Task 1' #TODO: make this dynamic
         return variables
 
 
