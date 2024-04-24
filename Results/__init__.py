@@ -1,5 +1,6 @@
 from otree.api import *
 
+#TODO: results: bonus calculations
 
 doc = """
 Your app description
@@ -52,14 +53,16 @@ class MyBasePage(Page):
 #%% Pages
 
 class Results(Page):
-    pass
+    @staticmethod   
+    def is_displayed(player: Player):
+        return player.participant.Allowed
 
 
 class Failed_screening(MyBasePage):
     'This page is displayed if the player failed the comprehension checks'
     @staticmethod
     def is_displayed(player: Player):
-        return player.participant.Comprehension_passed 
+        return not player.participant.Comprehension_passed 
 
     @staticmethod
     def vars_for_template(player: Player):
@@ -79,7 +82,7 @@ class Failed_screening(MyBasePage):
 class Failed_attention(MyBasePage):
     @staticmethod
     def is_displayed(player: Player):
-        return not player.participant.Attention_passed  # player failed both attention checks
+        return not player.participant.Attention_passed  # player failed 2 attention checks
     @staticmethod
     def js_vars(player):
         return dict(

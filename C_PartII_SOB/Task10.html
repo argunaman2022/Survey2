@@ -1,5 +1,5 @@
 {{ block title }}
-{{Page_title}}
+Part II. {{Page_title}}
 {{ endblock }}
 
 {{ block content }}
@@ -14,7 +14,9 @@
 <script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 <script type="text/javascript" src="{{ static 'js/data_quality.js' }}"></script>
     
-
+In Part I, several others have made guesses about the average performance of men and women in the task described below. 
+<br>
+In the questions below, you are asked to guess the average of those guesses.
 <div class="card bg-light m-3">
     <div class="card-body">
 
@@ -86,7 +88,7 @@
               <span class="close" onclick="span_click(1)">&times;</span>
             </div>
           <p style="padding: 0px">
-         {{include C.Instructions_path}}
+         {{include C.Instructions_PartII}}
           </p>
         </div>
     </div>

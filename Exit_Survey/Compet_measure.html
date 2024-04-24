@@ -1,49 +1,14 @@
 {{ block title }}
-Part I. {{Page_title}}
+    One last question
 {{ endblock }}
-
-{{ block content }}
-
-<script type="text/javascript" src="{{ static 'js/Choice.js' }}"> </script>
-{{ endblock }}
-
 
 {{ block content }}
 <link rel="stylesheet" href="{{static 'css/css.css'}}">
 <link rel="stylesheet" href="{{static 'css/modal.css'}}">
 <script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 <script type="text/javascript" src="{{ static 'js/data_quality.js' }}"></script>
-    
-Below is a description of a task that past study participants have completed.
-
-Please read the description carefully and answer the questions below.
-<div class="card bg-light m-3">
-    <div class="card-body">
-
-    <h3 style="text-align: center;">
-        Description: {{Task}} Task
-    </h3>
-
-
-
-    <p>
-        {{Task_description}}
-        <br><br>
-        {{Picture_desc}}<br>
-        <div style="text-align: center;">
-            <img src="{{Picture_link}}" style="width: 700px;">
-        </div>
-        
-        <br>
-
-    </p> 
-    
-
-
-    </div>
-
-
-</div>
+<link rel="stylesheet" href="{{static 'css/slider.css'}}">
+<script type="text/javascript" src="{{ static 'js/slider.js' }}"></script>
 
 
 {% for field in form %}
@@ -59,11 +24,33 @@ Please read the description carefully and answer the questions below.
         {% endif %}
     {% endfor %}
 </div>
+
+
+<div class="slider-container"> 
+    <label class="slider-question" > <b>How competitive do you consider yourself to be?</b><br> Please choose a value on the scale below, where the value
+        <b>0 means 'not competitive at all'</b> and the value <b>10 means 'very competitive'</b> 	</label>
+    <br>
+    <div class="slider-range-labels">
+        <div class="label">0</div>
+        <div class="label">1</div>
+        <div class="label">2</div>
+        <div class="label">3</div>
+        <div class="label">4</div>
+        <div class="label">5</div>
+        <div class="label">6</div>
+        <div class="label">7</div>
+        <div class="label">8</div>
+        <div class="label">9</div>
+        <div class="label">10</div>
+
+    </div>
+    <input type="range" id="dimension" min="0" max="10" value="0" step="1" class="form-range" oninput="sliderChange(dimension)"> 
+</div>
+
     <br><br>
 
     <div class="buttons-container">
         <a id="myBtn" onclick="open_modal(2)"  class="otree-btn-next btn btn-primary">Exit Survey (Return task)</a>
-        <a id="myBtn" onclick="open_modal(1)"  class="otree-btn-next btn btn-primary">Instructions</a>
         <button id="NextButton" class="otree-btn-next btn btn-primary">Next</button>
     </div>
     
@@ -73,7 +60,7 @@ Please read the description carefully and answer the questions below.
           <div class="modal-header">
             <h2>You are about to quit the study</h2>
           </div>
-{{include C.Quit_study_text_path}}
+       {{include C.Quit_study_text_path}}
         <div class="buttons-container">
             <a id="myBtn" onclick="span_click(2)"  class="otree-btn-next btn btn-primary">Cancel</a>
             <a href="{{C.Return_redirect}}" class="otree-btn-next btn btn-primary">OK</a>
@@ -81,17 +68,6 @@ Please read the description carefully and answer the questions below.
       </div>
     </div>
     
-    <div id="myModal1" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-              <h2>Instructions</h2>
-              <span class="close" onclick="span_click(1)">&times;</span>
-            </div>
-          <p style="padding: 0px">
-         {{include C.Instructions_path}}
-          </p>
-        </div>
-    </div>
 
     <br><br>
 {{ endblock }}

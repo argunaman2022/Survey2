@@ -1,12 +1,50 @@
 {{ block title }}
-    Exit survey
+Part II. {{Page_title}}
 {{ endblock }}
+
+{{ block content }}
+
+<script type="text/javascript" src="{{ static 'js/Choice.js' }}"> </script>
+{{ endblock }}
+
 
 {{ block content }}
 <link rel="stylesheet" href="{{static 'css/css.css'}}">
 <link rel="stylesheet" href="{{static 'css/modal.css'}}">
 <script type="text/javascript" src="{{ static 'js/Script_modal.js' }}"></script>
 <script type="text/javascript" src="{{ static 'js/data_quality.js' }}"></script>
+    
+In Part I, several others have made guesses about the average performance of men and women in the task described below. 
+<br>
+In the questions below, you are asked to guess the average of those guesses.
+<div class="card bg-light m-3">
+    <div class="card-body">
+
+    <h3 style="text-align: center;">
+        {{Task}} Task
+    </h3>
+
+
+
+    <p>
+        {{Task_description}}
+        <br><br>
+        {{Picture_desc}}<br>
+        <div style="text-align: center;">
+            <img src="{{Picture_link}}" style="width: 700px;">
+        </div>
+        
+        <br>
+
+    </p> 
+    
+
+
+    </div>
+
+
+</div>
+
 
 {% for field in form %}
     {% if field.name not in hidden_fields %}
@@ -21,9 +59,6 @@
         {% endif %}
     {% endfor %}
 </div>
-
-
-
     <br><br>
 
     <div class="buttons-container">
@@ -38,7 +73,7 @@
           <div class="modal-header">
             <h2>You are about to quit the study</h2>
           </div>
-       {{include C.Quit_study_text_path}}
+{{include C.Quit_study_text_path}}
         <div class="buttons-container">
             <a id="myBtn" onclick="span_click(2)"  class="otree-btn-next btn btn-primary">Cancel</a>
             <a href="{{C.Return_redirect}}" class="otree-btn-next btn btn-primary">OK</a>
@@ -53,7 +88,7 @@
               <span class="close" onclick="span_click(1)">&times;</span>
             </div>
           <p style="padding: 0px">
-         {{include C.Instructions_path}}
+         {{include C.Instructions_PartII}}
           </p>
         </div>
     </div>

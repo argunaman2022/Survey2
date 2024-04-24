@@ -9,7 +9,7 @@ This is the main survey app. It contains
 - You can additionally calculate payoffs and save them at a participant field.
 '''
 class C(BaseConstants):
-    NAME_IN_URL = 'Part_I'
+    NAME_IN_URL = 'Part_II'
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 1
     
@@ -20,8 +20,12 @@ class C(BaseConstants):
     Return_redirect = "https://www.wikipedia.org/" #TODO: adjust redirect
     
     # for now only the complete tasks are listed here
+    #TODO: ensure that there is a task.html and pic for every task
     #TODO: should we put an average person earned 100 in the question isntead of description?
     Task_details = pd.read_csv('_static/Tasks.csv')
+    
+    # TODO: this is using the same template for now, adjust it 
+    Instructions_PartII = "_templates/global/Instructions_PartII.html" 
 
 
     
@@ -34,99 +38,96 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):   
     # data quality
-    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page 
+    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page #TODO: ensure that this is added to all the pages
+  
+    Attention_3 = models.BooleanField(initial=False)
+    Attention3_male_FOB = models.FloatField(min=0, max=100, label="This is an attention check. <b>Please select</b> 100 below, so that we know you are paying attention.") #maybe half of the participants should answer with women?
+    Attention3_female_FOB = models.FloatField(min=0, max=100, label="This is an attention check. <b>Please select</b> 0 below, so that we know you are paying attention.") #maybe half of the participants should answer with women?
     
-    # Attention check 2, 1 was in introduction 
-    Attention_2 = models.BooleanField(choices=[
-            [True, 'I disagree.'],
-            [False, 'I think both are possible.'],
-            [False, 'I agree.'],], 
-        label= 'A 20 year old man can eat 500kg meat and 2 tons of vegetables in one meal.', widget=widgets.RadioSelect)
             
     # Player answers
     #TODO: should i force them to add up to 200?
     #TODO: remove blank=True from all fields below
-    Task1_male_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") #maybe half of the participants should answer with women?
-    Task1_female_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") #maybe half of the participants should answer with women?
+    Task1_male_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") #maybe half of the participants should answer with women?
+    Task1_female_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") #maybe half of the participants should answer with women?
     
-    Task2_male_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task2_female_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task2_male_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task2_female_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task3_male_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task3_female_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task3_male_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task3_female_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task4_male_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task4_female_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task4_male_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task4_female_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task5_male_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task5_female_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task5_male_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task5_female_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task6_male_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task6_female_FOB = models.FloatField(blank=True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task6_male_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task6_female_FOB = models.FloatField(blank=True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task7_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task7_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task7_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task7_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task8_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task8_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task8_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task8_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task9_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task9_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task9_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task9_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task10_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task10_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task10_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task10_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task11_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task11_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task11_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task11_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task12_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task12_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task12_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task12_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task13_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task13_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task13_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task13_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task14_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task14_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task14_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task14_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task15_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task15_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task15_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task15_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task16_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task16_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task16_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task16_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task17_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task17_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task17_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task17_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task18_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task18_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task18_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task18_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task19_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task19_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task19_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task19_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task20_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task20_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task20_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task20_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task21_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task21_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task21_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task21_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task22_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task22_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task22_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task22_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task23_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task23_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task23_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task23_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task24_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
-    Task24_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
+    Task24_male_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
+    Task24_female_FOB = models.FloatField(blank= True, min=0, max=100, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
     
     
 #%% Functions
 def get_task_details(player, page_number):
+    page_number = page_number
     treatment = player.participant.Treatment
     task = treatment[page_number-1]
    
     task_row = C.Task_details.loc[C.Task_details['Name'] == task]
-    print(task_row)
-    print(f"treatment is: {treatment}, task is: {task}")
     description = task_row['Task_description'].values[0]
     picture_link = f"https://raw.githubusercontent.com/argunaman2022/Survey2/main/_static/Task_pictures/{task}.png"
     picture_desc = task_row['Picture_description'].values[0]
@@ -145,20 +146,46 @@ class MyBasePage(Page):
     @staticmethod
     def vars_for_template(player: Player):
         return {'hidden_fields': ['blur_event_counts'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
-                'Instructions': C.Instructions_path,
+                'Instructions': C.Instructions_PartII,
                 } 
   
 # Pages
 
-class Attention_check_2(MyBasePage):         
-    extra_fields = ['Attention_2']
+class Attention_check_3(MyBasePage):    
+    extra_fields = ['Attention3_male_FOB', 'Attention3_female_FOB'] 
     form_fields = MyBasePage.form_fields + extra_fields
     
+    @staticmethod
+    def vars_for_template(player: Player):
+        variables = MyBasePage.vars_for_template(player)
+        task, description, picture_link, picture_desc, page_number = get_task_details(player, 2)
+        
+        variables['Task'] = task
+        variables['Task_description'] = description
+        variables['Picture_link'] = picture_link
+        variables['Picture_desc'] = picture_desc
+        variables['Page_title'] = f'Task {page_number}'
+        return variables
+    
     def before_next_page(player: Player, timeout_happened=False):
-        player.participant.vars['Attention_2'] = player.Attention_2
-        if (not player.Attention_2 and not player.participant.vars['Attention_1']):
+        if player.Attention3_male_FOB == 100 and player.Attention3_female_FOB == 0:
+            player.Attention_3 = True
+            print("Attention check 3 passed")
+        elif (not player.participant.vars['Attention_1'] or not player.participant.vars['Attention_2']):
+            print("Attention check 3 failed")
             player.participant.vars['Allowed'] = False
             player.participant.vars['Attention_passed'] = False
+
+class Instructions_PartII(MyBasePage):
+    @staticmethod
+    def is_displayed(player: Player):
+        return player.participant.Allowed
+    
+    @staticmethod
+    def vars_for_template(player: Player):
+        return {'hidden_fields': ['blur_event_counts'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
+                'Page_title': 'PartII: Instructions',
+                }
 
 class Task1(MyBasePage):
     extra_fields = ['Task1_male_FOB','Task1_female_FOB'] 
@@ -532,8 +559,9 @@ class Task23(MyBasePage):
 
 
 page_sequence = [
+    Instructions_PartII,
     Task1, Task2,
     # Task3, Task4, Task5, Task6, Task7, Task8, Task9, Task10,
     # Task11, Task12, Task13, Task14, Task15, Task16, Task17, Task18, Task19, Task20, Task21, Task22, Task23, 
-    Attention_check_2,
+    Attention_check_3,
     ]

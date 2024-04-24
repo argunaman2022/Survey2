@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 count=0
 // Event listener for blur event
-// TODO: test this with other browsers
 window.addEventListener('blur', function() {
     // Code to save that the user clicked out of the window
     console.log('blur event detected in page:')

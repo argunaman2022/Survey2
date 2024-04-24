@@ -87,8 +87,8 @@ class Player(BasePlayer):
                                      ],)
     
     # Data quality. 
-    browser = models.StringField(blank=True) #browser used by the participant #TODO: make sure this variable is saved in the very first page (e.g. see demographics)
-    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page #TODO: ensure that this is added to all the pages
+    browser = models.StringField(blank=True) #browser used by the participant
+    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page 
     'Comprehension and attention checks'
     #whether the player got the comprehension questions rigt at the first try
     Comprehension_1 = models.BooleanField(initial=True) 
@@ -96,24 +96,25 @@ class Player(BasePlayer):
     Comprehension_wrong_answers = models.StringField(initial='') 
     Comprehension_2 = models.BooleanField(initial=True) 
     
-    Comprehension_question_1 = models.BooleanField( choices=[
-            [True,'Correct answer'], # Correct answer here
-            [False, 'False answer'],
-            [False, 'False answer'],],
-        label = 'Comprehension question 1 - Correct answer is the first one',
-        widget=widgets.RadioSelect,
-        )
-    Comprehension_question_2 = models.BooleanField(choices=[
-            [True,'Correct answer'], 
-            [False, 'False answer'],
-            [False, 'False answer'],],
-        label = 'Comprehension question 1',
+    Comprehension_question_1 = models.BooleanField(choices=[
+            [True,'One of my answers from either Part I or Part II will be randomly chosen to determine my bonus.'], # Correct answer here
+            [False, 'One of my answers from Part I will be randomly chosen to determine my bonus.'],
+            [False, 'One of my answers from Part I will be randomly chosen to determine my bonus'],],
+        label = 'Which of the following is correct?',
         widget=widgets.RadioSelect)
+    
+    Comprehension_question_2 = models.BooleanField(choices=[
+            [False,'To play the same various tasks others have completed in in the past.'], # Correct answer here
+            [True, 'To guess the average performance of men and women who, in the past, took part in various tasks.'],
+            [False, 'To guess how other people will perform in various tasks in future.'],],
+        label = 'What is your task in Part I?',
+        widget=widgets.RadioSelect)
+    
     Comprehension_question_3 = models.BooleanField(choices=[
-            [True,'Correct answer'], 
-            [False, 'False answer'],
-            [False, 'False answer'],],
-        label = 'Comprehension question 1',
+            [True,'I will make a guess about the same tasks I saw in Part I. My exact task will be explained later.'], # Correct answer here
+            [False, 'To guess the average performance of men and women who, in the past, took part in various tasks.'],
+            [False, 'To guess how other people will perform in various tasks in future.'],],
+        label = 'What is your task in Part II?',
         widget=widgets.RadioSelect)
     
     Attention_1 = models.BooleanField(choices=[
@@ -133,7 +134,7 @@ class Player(BasePlayer):
     
 #%% Functions
 def treatment_assignment(player):
-    #TODO: ensure that treatment assignment is working properly i.e. given 660 random people we have equal number of tasks (excl math memory)
+    #TODO: ensure that treatment assignment is working properly 
     session=player.subsession.session
     Quotas = session.Treatment_quotas
     
@@ -186,7 +187,6 @@ class Consent(Page):
         treatment_assignment(player) #assign treatment and update quotas 
         
 class Demographics(MyBasePage):
-    #TODO: add honeypot field to demographics
     extra_fields = ['age', 'gender', 'education', 'income','browser'] 
     form_fields = MyBasePage.form_fields + extra_fields
         
@@ -269,8 +269,7 @@ class Attention_check_1(MyBasePage):
     def before_next_page(player: Player, timeout_happened=False):
         player.participant.vars['Attention_1'] = player.Attention_1
 
-#Add back  Demographics, Instructions,
 
-page_sequence = [Consent,
+page_sequence = [Consent, Demographics, Instructions,
                  Comprehension_check_1, Comprehension_check_2,
                  Attention_check_1]

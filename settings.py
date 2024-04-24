@@ -1,8 +1,7 @@
 from os import environ
 
-#TODO: add part II _ SOB
 SESSION_CONFIGS = [ 
-    dict(name='Study', app_sequence=['A_Introduction','B_PartI_FOB', 'Exit_Survey', 'Results'], num_demo_participants=200,
+    dict(name='Study', app_sequence=['A_Introduction','B_PartI_FOB', 'C_PartII_SOB', 'Exit_Survey', 'Results'], num_demo_participants=200,
          completionlink='prolific completion link!!!!!!'), #TODO: add the proper completion link from prolific
 
 ]
@@ -20,12 +19,11 @@ ROOMS = [
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=1.00, participation_fee=0.00, doc=""
 )
-#TODO: add the relevant participant fields if you wanna pass them thourgh apps
 PARTICIPANT_FIELDS = [
+    'Attention_1', 'Attention_2',
     'Allowed','Comprehension_passed', 'Attention_passed',
     'Treatment'
 ]
-#TODO: add the treatments here
 SESSION_FIELDS = {
                     'Treatment_quotas':{}, 
                  }

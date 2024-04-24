@@ -24,19 +24,26 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Exit survey
-    Exit_1 = models.StringField(initial='')
-    Exit_2 = models.StringField(initial='')
-    Exit_3 = models.StringField(initial='')
+    Compet_measure = models.FloatField()
     
     #Pilot questions
-    Pilot_1 = models.StringField(initial='')
-    Pilot_2 = models.StringField(initial='')
-    Pilot_3 = models.StringField(initial='')
-    Pilot_4 = models.StringField(initial='')
-    Pilot_5 = models.StringField(initial='')
-    Pilot_6 = models.StringField(initial='')
+    Pilot_1 = models.StringField(label = 'The general instructions were clear and easy to understand.' , 
+                                 choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
+    )
+    Pilot_2 = models.StringField(label = 'The payment rules for the bonus payment were clear and easy to understand.' , 
+                                 choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
+    )
+    Pilot_3 = models.StringField(label = 'The instructions for the tasks (the tasks you were evaluating) were clear and easy to understand.' , 
+                                 choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
+    )
+    Pilot_4 = models.StringField(label = 'Was the study interesting/boring?' , 
+                                 choices=['Very boring', 'Boring', 'Neutral', 'Interesting', 'Very interesting'], widget=widgets.RadioSelectHorizontal
+    )
+    Pilot_5 = models.LongStringField(label = 'Any other general remarks? (e.g. technical issues, suggestions for improvement, etc.)', 
+                                 blank=True
+    )
     
-    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page #TODO: ensure that this is added to all the pages
+    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page 
 
 
 #%% Base Pages
@@ -52,34 +59,25 @@ class MyBasePage(Page):
     
     @staticmethod
     def vars_for_template(player: Player):
-        return {'hidden_fields': ['bullshit'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
+        return {'hidden_fields': ['blur_event_counts'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
                 'Instructions': C.Instructions_path} 
 
 #%% Pages
-class MyBasePage(MyBasePage):
-    'MyBasePage contains the functions that are common to all pages'
-    extra_fields = ['blur_event_counts']
-    form_fields = MyBasePage.form_fields + extra_fields
 
+class Compet_measure(MyBasePage):
+    extra_fields = ['Compet_measure']
+    form_fields = MyBasePage.form_fields + extra_fields
     
-    
-    @staticmethod
-    def is_displayed(player: Player):
-        return player.participant.Allowed 
-    
-    @staticmethod
     def vars_for_template(player: Player):
-        return {'hidden_fields': ['bullshit'], #hide the browser field from the participant, see the page to see how this works. #user_clicked_out
-                'Instructions': C.Instructions_path} 
-
-class Exit_survey(MyBasePage):
-    extra_fields = ['Exit_1','Exit_2','Exit_3']
-    form_fields = MyBasePage.form_fields + extra_fields
+        variables = MyBasePage.vars_for_template(player)
+        variables['hidden_fields'] = variables['hidden_fields'] + ['Compet_measure']
+        return variables
     
 # Only for pilot
+#TODO: remove pilot questions before launch
 class Pilot(MyBasePage):
-    extra_fields = ['Pilot_1','Pilot_2','Pilot_3','Pilot_4','Pilot_5','Pilot_6']
+    extra_fields = ['Pilot_1','Pilot_2','Pilot_3','Pilot_4','Pilot_5']
     form_fields = MyBasePage.form_fields + extra_fields
     
         
-page_sequence = [Exit_survey, Pilot]
+page_sequence = [Compet_measure, Pilot, ]
