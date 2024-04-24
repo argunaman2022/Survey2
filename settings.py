@@ -1,7 +1,7 @@
 from os import environ
 
 SESSION_CONFIGS = [ 
-    dict(name='Study', app_sequence=['A_Introduction','B_PartI_FOB', 'C_PartII_SOB', 'Exit_Survey', 'Results'], num_demo_participants=200,
+    dict(name='Study', app_sequence=['A_Introduction','B_PartI_FOB', 'C_PartII_SOB', 'Exit_Survey', 'Results'], num_demo_participants=100,
          completionlink='prolific completion link!!!!!!'), #TODO: add the proper completion link from prolific
 
 ]
@@ -25,7 +25,7 @@ PARTICIPANT_FIELDS = [
     'Treatment'
 ]
 SESSION_FIELDS = {
-                    'Treatment_quotas':{}, 
+                    'Quotas':{}, 
                  }
 
 # ISO-639 code

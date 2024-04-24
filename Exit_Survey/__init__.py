@@ -43,7 +43,7 @@ class Player(BasePlayer):
                                  blank=True
     )
     
-    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page 
+    blur_event_counts = models.StringField(initial=0, blank=True) # logs how often user clicked out of the page 
 
 
 #%% Base Pages

@@ -38,10 +38,14 @@ class C(BaseConstants):
     
     # Treatment quotas. This will be copied to the session variable.
     quotas = {
-    'Male_Math': 0,
-    'Male_Memory' : 0,
-    'Female_Math': 0,
-    'Female_Memory': 0,
+    'Anagram':0, 'Ball-bucket':0, 'Spot-the-difference':0, 
+    'Count-numbers':0, 'Data-search':0, 'Emotion-recognition':0,
+    'Find-hidden-words':0, 'Math':0, 'Memory':0,
+    'Search-summation':0, 'Letter-difference':0, 'Maze':0,
+    'Mental-rotation':0, 'Multiplication':0, 'Number-in-Numbers':0,
+    'Adding-numbers':0, 'Quiz':0, 'Rearrange-words':0,
+    'Stock-forecasting':0, 'Typing':0, 'Verify-arithmetics':0,
+    'Visual-memory':0,'Word-in-word':0
     }
     
 class Subsession(BaseSubsession):
@@ -56,7 +60,7 @@ def creating_session(subsession):
         we need this balancing to be within treatment level also
     '''
 
-    subsession.session.Treatment_quotas = C.quotas.copy()
+    subsession.session.Quotas = C.quotas.copy()
     
     for player in subsession.get_players():
         player.participant.Allowed = True
@@ -85,7 +89,7 @@ class Player(BasePlayer):
     
     # Data quality. 
     browser = models.StringField(blank=True) #browser used by the participant
-    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page 
+    blur_event_counts = models.StringField(initial=0, blank=True) # logs how often user clicked out of the page 
     'Comprehension and attention checks'
     #whether the player got the comprehension questions rigt at the first try
     Comprehension_1 = models.BooleanField(initial=True) 
@@ -133,27 +137,33 @@ class Player(BasePlayer):
 def treatment_assignment(player):
     #TODO: ensure that treatment assignment is working properly 
     session=player.subsession.session
-    Quotas = session.Treatment_quotas
+    Quotas = session.Quotas
+    
     
     #the line below does: splits the Quotas into two halves, picks one of them randomly from the bottom half.
     '''
     Quota/Treatment assignment works as follows:
     1. get the current quotas
-    2. assign a random treatment from the bottom half of the quotas (i.e. the treatment with the lowest quota)
-    3. update quotas accordingly.
+    2. assign 13 tasks to the player from tasks that have the lowest quotas. 
+    3. Increment those quotas
     '''
-    Quota = random.choice([key for key, value in Quotas.items() if value in sorted(Quotas.values())[:1]])
-    treatment = C.All_tasks.copy()
-
-    #TODO: currently all tasks are shown, make it be shown based on treatment only by uncommenting the lines below
-    #treatment equals either Math or Memory + 13 random tasks from All_tasks
-    # treatment = [Quota.split('_')[1]] + random.sample(C.All_tasks, 13)
-    # # randomize the items #TODO: check if it works
-    # treatment = random.sample(treatment, len(treatment))
+    treatment = random.sample(['Math','Memory'],1) 
+    
+    idx = 0
+    for i in range(13):
+        task = random.choice([key for key, value in Quotas.items() if value in sorted(Quotas.values())[:12] and key not in ['Math', 'Memory']])
+        treatment.append(task)
+        Quotas[task]+=1
+    
+    # randomized order
+    treatment = random.sample(treatment, len(treatment))
     
     player.participant.Treatment = treatment
     print('Treatment assigned:', treatment)
-    Quotas.update({Quota: Quotas[Quota]+1})
+
+    #TODO: uncomment the line below to display all tasks
+    treatment = C.All_tasks.copy()
+    session.Quotas = Quotas
 
 
 # PAGES

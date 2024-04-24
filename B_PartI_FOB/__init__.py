@@ -34,7 +34,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):   
     # data quality
-    blur_event_counts = models.StringField(initial=0) # logs how often user clicked out of the page 
+    blur_event_counts = models.StringField(initial=0, blank=True) # logs how often user clicked out of the page 
     
     # Attention check 2, 1 was in introduction 
     Attention_2 = models.BooleanField(choices=[
@@ -84,7 +84,8 @@ class Player(BasePlayer):
     
     Task13_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
     Task13_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
-    
+
+    #TODO: comment the lines below since a participant should see 14 tasks. Delete the respective pages    
     Task14_male_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average man earned</strong>?") 
     Task14_female_FOB = models.FloatField(blank= True, min=0, max=100, label="How many points do you think <strong>an average woman earned</strong>?") 
     
@@ -125,8 +126,6 @@ def get_task_details(player, page_number):
     task = treatment[page_number-1]
    
     task_row = C.Task_details.loc[C.Task_details['Name'] == task]
-    print(task_row)
-    print(f"treatment is: {treatment}, task is: {task}")
     description = task_row['Task_description'].values[0]
     picture_link = f"https://raw.githubusercontent.com/argunaman2022/Survey2/main/_static/Task_pictures/{task}.png"
     picture_desc = task_row['Picture_description'].values[0]
@@ -173,7 +172,7 @@ class Task1(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task2(MyBasePage):
@@ -189,7 +188,7 @@ class Task2(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task3(MyBasePage):
@@ -205,7 +204,7 @@ class Task3(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task4(MyBasePage):
@@ -221,7 +220,7 @@ class Task4(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task5(MyBasePage):
@@ -237,7 +236,7 @@ class Task5(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task6(MyBasePage):
@@ -253,7 +252,7 @@ class Task6(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task7(MyBasePage):
@@ -269,7 +268,7 @@ class Task7(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task8(MyBasePage):
@@ -285,7 +284,7 @@ class Task8(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task9(MyBasePage):
@@ -301,7 +300,7 @@ class Task9(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task10(MyBasePage):
@@ -317,7 +316,7 @@ class Task10(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task11(MyBasePage):
@@ -333,7 +332,7 @@ class Task11(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task12(MyBasePage):
@@ -349,7 +348,7 @@ class Task12(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task13(MyBasePage):
@@ -365,7 +364,7 @@ class Task13(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task14(MyBasePage):
@@ -381,7 +380,7 @@ class Task14(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task15(MyBasePage):
@@ -397,7 +396,7 @@ class Task15(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task16(MyBasePage):
@@ -413,7 +412,7 @@ class Task16(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task17(MyBasePage):
@@ -429,7 +428,7 @@ class Task17(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task18(MyBasePage):
@@ -445,7 +444,7 @@ class Task18(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task19(MyBasePage):
@@ -461,7 +460,7 @@ class Task19(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task20(MyBasePage):
@@ -477,7 +476,7 @@ class Task20(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task21(MyBasePage):
@@ -493,7 +492,7 @@ class Task21(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task22(MyBasePage):
@@ -509,7 +508,7 @@ class Task22(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 class Task23(MyBasePage):
@@ -525,7 +524,7 @@ class Task23(MyBasePage):
         variables['Task_description'] = description
         variables['Picture_link'] = picture_link
         variables['Picture_desc'] = picture_desc
-        variables['Page_title'] = f'Task {page_number}'
+        variables['Page_title'] = f'Task {page_number} of 14'
         return variables
 
 
@@ -534,6 +533,8 @@ class Task23(MyBasePage):
 page_sequence = [
     Task1, Task2,
     Task3, Task4, Task5, Task6, Task7, Task8, Task9, Task10,
-    Task11, Task12, Task13, Task14, Task15, Task16, Task17, Task18, Task19, Task20, Task21, Task22, Task23, 
+    Task11, Task12, Task13, Task14,
+    #TODO: uncomment the line below to see all tasks
+    # Task15, Task16, Task17, Task18, Task19, Task20, Task21, Task22, Task23, 
     Attention_check_2,
     ]
