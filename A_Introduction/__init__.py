@@ -3,7 +3,7 @@ import random
 
 doc = '''
 This is the first app - the Introduction app. It contains
-1. Demgraphics page
+1. Demographics page
 2. Instructions that participants can always access
 3. Comprehension checks 
 4. and the first attention checks
@@ -78,7 +78,7 @@ class Player(BasePlayer):
     gender = models.StringField(blank=True, label='Gender at birth',
                                 choices=['Male', 'Female', 'Other/Prefer not to say'], widget=widgets.RadioSelect)
     education = models.StringField(blank=True, label = 'Education level',
-                                   choices=['Haven’t graduated high school','GED','High school graduate','Bachelors','Masters','Professional degree (JD, MD, MBA)','Doctorate'], widget=widgets.RadioSelect) 
+                                   choices=['Did not graduate fromhigh school','GED','High school graduate','Bachelors','Masters','Professional degree (JD, MD, MBA)','Doctorate'], widget=widgets.RadioSelect) 
     # education = models.StringField(label = 'Education level',
     #                                choices=['High school or lower','Bachelors degree','Masters degree','PhD','Other'], widget=widgets.RadioSelect) 
     
@@ -100,21 +100,21 @@ class Player(BasePlayer):
     Comprehension_question_1 = models.BooleanField(choices=[
             [True,'One of my answers from either Part I or Part II will be randomly chosen to determine my bonus.'], # Correct answer here
             [False, 'One of my answers from Part I will be randomly chosen to determine my bonus.'],
-            [False, 'One of my answers from Part I will be randomly chosen to determine my bonus'],],
+            [False, 'One of my answers from Part II will be randomly chosen to determine my bonus'],],
         label = 'Which of the following is correct?',
         widget=widgets.RadioSelect)
     
     Comprehension_question_2 = models.BooleanField(choices=[
-            [False,'To play the same various tasks others have completed in in the past.'], # Correct answer here
+            [False,'To play the same various tasks that others have completed in in the past.'], # Correct answer here
             [True, 'To guess the average performance of men and women who, in the past, took part in various tasks.'],
-            [False, 'To guess how other people will perform in various tasks in future.'],],
+            [False, 'To guess how other people will perform in various tasks in the future.'],],
         label = 'What is your task in Part I?',
         widget=widgets.RadioSelect)
     
     Comprehension_question_3 = models.BooleanField(choices=[
-            [True,'I will make a guess about the same tasks I saw in Part I. My exact task will be explained later.'], # Correct answer here
+            [True,'I will make a guess about the same tasks that I saw in Part I. My exact task will be explained later.'], # Correct answer here
             [False, 'To guess the average performance of men and women who, in the past, took part in various tasks.'],
-            [False, 'To guess how other people will perform in various tasks in future.'],],
+            [False, 'To guess how other people will perform in various tasks in the future.'],],
         label = 'What is your task in Part II?',
         widget=widgets.RadioSelect)
     
