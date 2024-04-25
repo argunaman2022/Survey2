@@ -535,6 +535,6 @@ page_sequence = [
     Task3, Task4, Task5, Task6, Task7, Task8, Task9, Task10,
     Task11, Task12, Task13, Task14,
     #TODO: uncomment the line below to see all tasks
-    # Task15, Task16, Task17, Task18, Task19, Task20, Task21, Task22, Task23, 
+    Task15, Task16, Task17, Task18, Task19, Task20, Task21, Task22, Task23, 
     Attention_check_2,
     ]
