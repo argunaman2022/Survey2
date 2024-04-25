@@ -158,11 +158,12 @@ def treatment_assignment(player):
     # randomized order
     treatment = random.sample(treatment, len(treatment))
     
-    player.participant.Treatment = treatment
-    print('Treatment assigned:', treatment)
 
-    #TODO: uncomment the line below to display all tasks
+    #TODO: uncomment the line below to display only 14 tasks
     treatment = C.All_tasks.copy()
+    print(f"number oftasks: {len(treatment)}")
+    print('Treatment assigned:', treatment)
+    player.participant.Treatment = treatment
     session.Quotas = Quotas
 
 
