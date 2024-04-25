@@ -33,7 +33,7 @@ class Player(BasePlayer):
     Pilot_2 = models.StringField(label = 'The payment rules for the bonus payment were clear and easy to understand.' , 
                                  choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
     )
-    Pilot_3 = models.StringField(label = 'The instructions for the tasks (the tasks you were evaluating) were clear and easy to understand.' , 
+    Pilot_3 = models.StringField(label = 'The instructions for the tasks you were evaluating were clear and easy to understand.' , 
                                  choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
     )
     Pilot_4 = models.StringField(label = 'Was the study interesting/boring?' , 
