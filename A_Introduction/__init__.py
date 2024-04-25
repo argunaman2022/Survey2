@@ -78,7 +78,7 @@ class Player(BasePlayer):
     gender = models.StringField(blank=True, label='Gender at birth',
                                 choices=['Male', 'Female', 'Other/Prefer not to say'], widget=widgets.RadioSelect)
     education = models.StringField(blank=True, label = 'Education level',
-                                   choices=['Did not graduate fromhigh school','GED','High school graduate','Bachelors','Masters','Professional degree (JD, MD, MBA)','Doctorate'], widget=widgets.RadioSelect) 
+                                   choices=['Did not graduate from high school','GED','High school graduate','Bachelors','Masters','Professional degree (JD, MD, MBA)','Doctorate'], widget=widgets.RadioSelect) 
     # education = models.StringField(label = 'Education level',
     #                                choices=['High school or lower','Bachelors degree','Masters degree','PhD','Other'], widget=widgets.RadioSelect) 
     
