@@ -141,6 +141,7 @@ def treatment_assignment(player):
     #the line below does: splits the Quotas into two halves, picks one of them randomly from the bottom half.
     '''
     Quota/Treatment assignment works as follows:
+    0. Assign either Math or Memory to treatment. 
     1. get the current quotas
     2. assign 13 tasks to the player from tasks that have the lowest quotas. 
     3. Increment those quotas
@@ -149,7 +150,7 @@ def treatment_assignment(player):
     
     idx = 0
     for i in range(13):
-        task = random.choice([key for key, value in Quotas.items() if value in sorted(Quotas.values())[:12] and key not in ['Math', 'Memory']])
+        task = random.choice([key for key, value in Quotas.items() if value in sorted(Quotas.values())[:12] and key not in ['Math', 'Memory'] and key not in treatment])
         treatment.append(task)
         Quotas[task]+=1
     
@@ -161,6 +162,9 @@ def treatment_assignment(player):
     # treatment = C.All_tasks.copy()
     player.participant.Treatment = treatment
     session.Quotas = Quotas
+    
+    # print('Treatment assigned:', treatment)
+    # print('\nQuotas:', Quotas)
 
 
 # PAGES
