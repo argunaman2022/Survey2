@@ -111,10 +111,10 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect)
     
     Comprehension_question_3 = models.BooleanField(choices=[
-            [True,'I will make a guess about the same tasks that I saw in Part I. My exact task will be explained later.'], # Correct answer here
-            [False, 'To guess the average performance of men and women who, in the past, took part in various tasks.'],
-            [False, 'To guess how other people will perform in various tasks in the future.'],],
-        label = 'What is your task in Part II?',
+            [False,'30, because 30+70=100'], # Correct answer here
+            [True, '130, because the average of 70 and 130 is 100.'],
+            [False, '142, because 142*70=100*100.'],],
+        label = 'Suppose an average man scored 70 points. How many points did an average woman score? (remember that the average person scored 100)?',
         widget=widgets.RadioSelect)
     
     Attention_1 = models.BooleanField(choices=[
