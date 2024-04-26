@@ -72,17 +72,16 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     # Demographics
-    #TODO: make all of these fields required by removing blank=True
     prolific_id = models.StringField(default=str("None")) #prolific id, will be fetched automatically.
-    age = models.IntegerField(blank=True, label="Age", min=18, max=100)
-    gender = models.StringField(blank=True, label='Gender at birth',
+    age = models.IntegerField( label="Age", min=18, max=100)
+    gender = models.StringField( label='Gender at birth',
                                 choices=['Male', 'Female', 'Other/Prefer not to say'], widget=widgets.RadioSelect)
-    education = models.StringField(blank=True, label = 'Education level',
+    education = models.StringField( label = 'Education level',
                                    choices=['Did not graduate from high school','GED','High school graduate','Bachelors','Masters','Professional degree (JD, MD, MBA)','Doctorate'], widget=widgets.RadioSelect) 
     # education = models.StringField(label = 'Education level',
     #                                choices=['High school or lower','Bachelors degree','Masters degree','PhD','Other'], widget=widgets.RadioSelect) 
     
-    income = models.StringField(blank=True, label='Approximately, what was your <strong>total household income</strong> in the last year, before taxes?',
+    income = models.StringField( label='Approximately, what was your <strong>total household income</strong> in the last year, before taxes?',
                             choices=['$0-$10.000', '$10.000-$20.000','$20.000-$30.000','$30.000-$40.000','$40.000-$50.000','$50.000-$60.000',
                                      '$50.000-$75.000', '$75.000-$100.000', '$100.000-$150.000', '$150.000-$200.000', '$200.000+', 'Prefer not to answer',
                                      ],)
@@ -135,7 +134,6 @@ class Player(BasePlayer):
     
 #%% Functions
 def treatment_assignment(player):
-    #TODO: ensure that treatment assignment is working properly 
     session=player.subsession.session
     Quotas = session.Quotas
     
@@ -159,10 +157,8 @@ def treatment_assignment(player):
     treatment = random.sample(treatment, len(treatment))
     
 
-    #TODO: uncomment the line below to display only 14 tasks
-    treatment = C.All_tasks.copy()
-    print(f"number oftasks: {len(treatment)}")
-    print('Treatment assigned:', treatment)
+    #uncomment the line below to display only all the tasks
+    # treatment = C.All_tasks.copy()
     player.participant.Treatment = treatment
     session.Quotas = Quotas
 
@@ -187,7 +183,6 @@ class MyBasePage(Page):
 #%% Pages
 
 #Consent, Demographics, Introduction, Comprehension checks and attention check 1
-#TODO: add quit study button to all pages
 class Consent(Page):   
     @staticmethod
     def before_next_page(player: Player, timeout_happened=False):
