@@ -67,8 +67,8 @@ class Failed_screening(MyBasePage):
     @staticmethod
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
-        failure_message = '''Unfortunately you did not successfuly pass the comprehension check. Because of this we cannot use your data. 
-                                We do not want to reject you because of this, so we ask you to <strong>return the study on Prolific</strong>. '''
+        failure_message = '''Unfortunately you did not pass the comprehension check successfully. Because of this we cannot use your data. 
+                                As we do not want to reject you because of this, we ask you to <strong>return the study on Prolific</strong>. '''
         # Add or modify variables specific to ExtendedPage
         variables['failure_message'] = failure_message
         return variables
