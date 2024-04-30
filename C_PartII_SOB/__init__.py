@@ -40,8 +40,8 @@ class Player(BasePlayer):
     blur_event_counts = models.StringField(initial=0, blank=True) # logs how often user clicked out of the page 
   
     Attention_3 = models.BooleanField(initial=False)
-    Attention3_male_SOB = models.FloatField(min=0, max=200, label="This is an attention check. <b>Please select</b> 100 below, so that we know you are paying attention.") #maybe half of the participants should answer with women?
-    Attention3_female_SOB = models.FloatField(min=0, max=200, label="This is an attention check. <b>Please select</b> 0 below, so that we know you are paying attention.") #maybe half of the participants should answer with women?
+    Attention3_male_SOB = models.FloatField(min=0, max=200, label="This is an attention check. <b>Please select</b> 100 below so that we know you are paying attention.") #maybe half of the participants should answer with women?
+    Attention3_female_SOB = models.FloatField(min=0, max=200, label="This is an attention check. <b>Please select</b> 0 below so that we know you are paying attention.") #maybe half of the participants should answer with women?
     
             
     # Player answers
