@@ -25,6 +25,7 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # Exit survey
     Compet_measure = models.FloatField()
+    Gender_measure = models.FloatField()
     
     #Pilot questions
     Pilot_1 = models.StringField(label = 'The general instructions were clear and easy to understand.' , 
@@ -65,12 +66,12 @@ class MyBasePage(Page):
 #%% Pages
 
 class Compet_measure(MyBasePage):
-    extra_fields = ['Compet_measure']
+    extra_fields = ['Compet_measure', 'Gender_measure']
     form_fields = MyBasePage.form_fields + extra_fields
     
     def vars_for_template(player: Player):
         variables = MyBasePage.vars_for_template(player)
-        variables['hidden_fields'] = variables['hidden_fields'] + ['Compet_measure']
+        variables['hidden_fields'] = variables['hidden_fields'] + ['Compet_measure', 'Gender_measure'] 
         return variables
     
 # Only for pilot

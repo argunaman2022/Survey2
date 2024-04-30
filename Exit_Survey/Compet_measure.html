@@ -1,5 +1,5 @@
 {{ block title }}
-    One last question
+    Exit Survey
 {{ endblock }}
 
 {{ block content }}
@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="{{static 'css/slider.css'}}">
 <script type="text/javascript" src="{{ static 'js/slider.js' }}"></script>
 
+<p>
+    <b>Please answer the questions below, by moving the sliders, to continue.</b>
+</p>
 
 {% for field in form %}
     {% if field.name not in hidden_fields %}
@@ -25,7 +28,7 @@
     {% endfor %}
 </div>
 
-
+<div style="text-align: center;">
 <div class="slider-container"> 
     <label class="slider-question" > <b>How competitive do you consider yourself to be?</b><br> Please choose a value on the scale below, where the value
         <b>0 means 'not competitive at all'</b> and the value <b>10 means 'very competitive'</b> 	</label>
@@ -44,9 +47,28 @@
         <div class="label">10</div>
 
     </div>
-    <input type="range" id="dimension" min="0" max="10" value="0" step="1" class="form-range" oninput="sliderChange(dimension)"> 
+    <input type="range" id="dimension" min="0" max="10" value="5" step="1" class="form-range" oninput="sliderChange(dimension, 'Compet_measure')"> 
 </div>
 
+<br><br>
+<div class="slider-container"> 
+    <label class="slider-question" > <b>Where would you put yourself on this scale?</b>
+	</label>
+    <br>
+    <div class="slider-range-labels">
+        <div class="label">Very masculine</div>
+        <div class="label">Moderately masculine</div>
+        <div class="label">Somewhat masculine</div>
+        <div class="label">Neutral</div>
+        <div class="label">Somewhat feminine</div>
+        <div class="label">Moderately feminine</div>
+        <div class="label">Very feminine</div>
+
+    </div>
+    <input type="range" id="dimension2" min="0" max="6" value="3" step="1" class="form-range" oninput="sliderChange2(dimension2, 'Gender_measure')"> 
+</div>
+
+</div>
     <br><br>
 
     <div class="buttons-container">
@@ -67,6 +89,7 @@
       </div>
       </div>
     </div>
+
     
 
     <br><br>
