@@ -114,7 +114,7 @@ class Player(BasePlayer):
             [False,'30, because 30+70=100'], # Correct answer here
             [True, '130, because the average of 70 and 130 is 100.'],
             [False, '142, because 142*70=100*100.'],],
-        label = 'Suppose an average man scored 70 points. How many points did an average woman score? (Remember that the average person scored 100.)',
+        label = 'Suppose that the average performance across all men and women was 100. Suppose as well that an average man scored 70 points. How many points did an average woman score?',
         widget=widgets.RadioSelect)
     
     Attention_1 = models.BooleanField(choices=[
