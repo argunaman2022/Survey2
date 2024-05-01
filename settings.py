@@ -2,7 +2,7 @@ from os import environ
 
 SESSION_CONFIGS = [ 
     dict(name='Study', app_sequence=['A_Introduction','B_PartI_FOB', 'C_PartII_SOB', 'Exit_Survey', 'Results'], num_demo_participants=100,
-         completionlink='prolific completion link!!!!!!'), #TODO: add the proper completion link from prolific
+         completionlink='https://app.prolific.com/submissions/complete?cc=CXLTD9FL'), 
 
 ]
 
@@ -25,7 +25,7 @@ PARTICIPANT_FIELDS = [
     'Treatment'
 ]
 SESSION_FIELDS = {
-                    'Quotas':{}, 
+                    'Quotas':{}, 'Quotas_male':{}, 'Quotas_female':{}, 
                  }
 
 # ISO-639 code

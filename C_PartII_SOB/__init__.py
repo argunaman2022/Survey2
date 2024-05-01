@@ -17,13 +17,11 @@ class C(BaseConstants):
     Quit_study_text_path = "_templates/global/Quit_study_text.html"
     tasks_path = "_templates/global/tasks/"
 
-    Return_redirect = "https://www.wikipedia.org/" #TODO: adjust redirect
+    Return_redirect = "https://app.prolific.com/submissions/complete?cc=CJG550CR"
     
     # for now only the complete tasks are listed here
-    #TODO: should we put an average person earned 100 in the question isntead of description?
     Task_details = pd.read_csv('_static/Tasks.csv')
     
-    # TODO: this is using the same template for now, adjust it 
     Instructions_PartII = "_templates/global/Instructions_PartII.html" 
 
 

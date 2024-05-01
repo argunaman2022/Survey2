@@ -1,6 +1,5 @@
 from otree.api import *
 
-#TODO: results: bonus calculations
 
 doc = """
 Your app description
@@ -11,9 +10,9 @@ class C(BaseConstants):
     NUM_ROUNDS = 1
     
     # Prolific links, gotten from the study page on prolific
-    Completion_redirect = 'https://www.wikipedia.org/' #TODO: adjust redirect
-    Failure_redirect = 'https://www.wikipedia.org/' #TODO: adjust redirect
-    Return_redirect = 'https://www.wikipedia.org/' #TODO: adjust redirect
+    Completion_redirect = "https://app.prolific.com/submissions/complete?cc=CXLTD9FL" 
+    Reject_redirect = "https://app.prolific.com/submissions/complete?cc=C1JREY8Y" 
+    Return_redirect = "https://app.prolific.com/submissions/complete?cc=CJG550CR"
 
     Instructions_path = "_templates/global/Instructions.html"
     Quit_study_text_path = "_templates/global/Quit_study_text.html"

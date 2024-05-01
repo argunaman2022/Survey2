@@ -20,9 +20,9 @@ class C(BaseConstants):
     NUM_ROUNDS = 1
     
     # Prolific links:
-    Completion_redirect = "https://www.wikipedia.org/" #TODO: adjust completion redirect
-    Reject_redirect = "https://www.wikipedia.org/" #TODO: adjust reject redirect
-    Return_redirect = "https://www.wikipedia.org/" #TODO: adjust return redirect
+    Completion_redirect = "https://app.prolific.com/submissions/complete?cc=CXLTD9FL" 
+    Reject_redirect = "https://app.prolific.com/submissions/complete?cc=C1JREY8Y" 
+    Return_redirect = "https://app.prolific.com/submissions/complete?cc=CJG550CR"
     
     Instructions_path = "_templates/global/Instructions.html"
     Quit_study_text_path = "_templates/global/Quit_study_text.html"
@@ -36,7 +36,7 @@ class C(BaseConstants):
                 'Stock-forecasting', 'Typing', 'Verify-arithmetics',
                 'Visual-memory','Word-in-word']
     
-    # Treatment quotas. This will be copied to the session variable.
+    # Treatment quotas. This will be copied to the session variables: one for each of the three gender choices.
     quotas = {
     'Anagram':0, 'Ball-bucket':0, 'Spot-the-difference':0, 
     'Count-numbers':0, 'Data-search':0, 'Emotion-recognition':0,
@@ -47,6 +47,7 @@ class C(BaseConstants):
     'Stock-forecasting':0, 'Typing':0, 'Verify-arithmetics':0,
     'Visual-memory':0,'Word-in-word':0
     }
+
     
 class Subsession(BaseSubsession):
     pass
@@ -60,7 +61,10 @@ def creating_session(subsession):
         we need this balancing to be within treatment level also
     '''
 
+    subsession.session.Quotas_male = C.quotas.copy()
+    subsession.session.Quotas_female = C.quotas.copy()
     subsession.session.Quotas = C.quotas.copy()
+    
     
     for player in subsession.get_players():
         player.participant.Allowed = True
@@ -135,7 +139,14 @@ class Player(BasePlayer):
 #%% Functions
 def treatment_assignment(player):
     session=player.subsession.session
-    Quotas = session.Quotas
+    
+    if player.gender == 'Male':
+        Quotas = session.Quotas_male
+    elif player.gender == 'Female':
+        Quotas = session.Quotas_female
+    else:
+        Quotas = session.Quotas
+    
     
     
     #the line below does: splits the Quotas into two halves, picks one of them randomly from the bottom half.
@@ -161,7 +172,14 @@ def treatment_assignment(player):
     #uncomment the line below to display only all the tasks
     # treatment = C.All_tasks.copy()
     player.participant.Treatment = treatment
-    session.Quotas = Quotas
+    
+    if player.gender == 'Male':
+        session.Quotas_male = Quotas 
+    elif player.gender == 'Female':
+        session.Quotas_female = Quotas 
+    else:
+        session.Quotas = Quotas
+    
     
     # print('Treatment assigned:', treatment)
     # print('\nQuotas:', Quotas)
@@ -191,7 +209,6 @@ class Consent(Page):
     @staticmethod
     def before_next_page(player: Player, timeout_happened=False):
         player.prolific_id = player.participant.label #save prolific id
-        treatment_assignment(player) #assign treatment and update quotas 
         
 class Demographics(MyBasePage):
     extra_fields = ['age', 'gender', 'education', 'income','browser'] 
@@ -203,6 +220,9 @@ class Demographics(MyBasePage):
 
         variables['hidden_fields'].append('browser') 
         return variables
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened=False):
+        treatment_assignment(player)
     
 class Instructions(MyBasePage):
     pass        

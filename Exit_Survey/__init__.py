@@ -13,7 +13,7 @@ class C(BaseConstants):
     Instructions_path = "_templates/global/Instructions.html"
     Quit_study_text_path = "_templates/global/Quit_study_text.html"
 
-    Return_redirect = "https://www.wikipedia.org/" #TODO: adjust return redirect
+    Return_redirect = "https://app.prolific.com/submissions/complete?cc=CJG550CR"
 
 
 class Subsession(BaseSubsession):

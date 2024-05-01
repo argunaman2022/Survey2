@@ -5,7 +5,7 @@ import random
 class PlayerBot(Bot):
     def play_round(self):
         # Simulating player responses for the pilot survey
-        yield Compet_measure, dict(Compet_measure=random.randint(0, 10)) 
+        yield Compet_measure, dict(Compet_measure=random.randint(0, 10), Gender_measure=random.randint(1, 5)) 
         
         yield Pilot, {
             'Pilot_1': random.choice(['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree']),
