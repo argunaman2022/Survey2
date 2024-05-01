@@ -45,78 +45,78 @@ class Player(BasePlayer):
     
             
     # Player answers
-    Task1_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") #maybe half of the participants should answer with women?
-    Task1_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") #maybe half of the participants should answer with women?
+    Task1_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") #maybe half of the participants should answer with women?
+    Task1_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") #maybe half of the participants should answer with women?
     
-    Task2_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task2_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task2_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task2_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task3_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task3_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task3_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task3_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task4_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task4_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task4_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task4_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task5_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task5_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task5_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task5_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task6_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task6_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task6_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task6_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task7_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task7_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task7_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task7_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task8_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task8_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task8_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task8_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task9_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task9_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task9_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task9_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task10_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task10_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task10_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task10_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task11_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task11_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task11_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task11_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task12_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task12_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task12_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task12_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task13_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task13_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task13_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task13_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    Task14_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    Task14_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    Task14_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    Task14_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
     #
-    # Task15_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task15_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task15_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task15_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task16_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task16_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task16_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task16_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task17_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task17_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task17_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task17_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task18_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task18_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task18_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task18_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task19_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task19_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task19_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task19_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task20_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task20_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task20_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task20_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task21_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task21_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task21_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task21_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task22_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task22_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task22_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task22_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task23_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task23_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task23_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task23_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
-    # Task24_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average man earned?'") 
-    # Task24_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response to the question: </strong>'How many points do you think an average woman earned?'") 
+    # Task24_male_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average man earned?'") 
+    # Task24_female_SOB = models.FloatField( min=0, max=200, label="<strong>What do you think was the average response (in Part I) to the question: </strong>'How many points do you think an average woman earned?'") 
     
     
 #%% Functions
