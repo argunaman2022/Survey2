@@ -28,21 +28,21 @@ class Player(BasePlayer):
     Gender_measure = models.FloatField()
     
     #Pilot questions
-    Pilot_1 = models.StringField(label = 'The general instructions were clear and easy to understand.' , 
-                                 choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
-    )
-    Pilot_2 = models.StringField(label = 'The payment rules for the bonus payment were clear and easy to understand.' , 
-                                 choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
-    )
-    Pilot_3 = models.StringField(label = 'The instructions for the tasks you were evaluating were clear and easy to understand.' , 
-                                 choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
-    )
-    Pilot_4 = models.StringField(label = 'Was the study interesting/boring?' , 
-                                 choices=['Very boring', 'Boring', 'Neutral', 'Interesting', 'Very interesting'], widget=widgets.RadioSelectHorizontal
-    )
-    Pilot_5 = models.LongStringField(label = 'Any other general remarks? (e.g. technical issues, suggestions for improvement, etc.)', 
-                                 blank=True
-    )
+    # Pilot_1 = models.StringField(label = 'The general instructions were clear and easy to understand.' , 
+    #                              choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
+    # )
+    # Pilot_2 = models.StringField(label = 'The payment rules for the bonus payment were clear and easy to understand.' , 
+    #                              choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
+    # )
+    # Pilot_3 = models.StringField(label = 'The instructions for the tasks you were evaluating were clear and easy to understand.' , 
+    #                              choices=['Strongly disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly agree'], widget=widgets.RadioSelectHorizontal
+    # )
+    # Pilot_4 = models.StringField(label = 'Was the study interesting/boring?' , 
+    #                              choices=['Very boring', 'Boring', 'Neutral', 'Interesting', 'Very interesting'], widget=widgets.RadioSelectHorizontal
+    # )
+    # Pilot_5 = models.LongStringField(label = 'Any other general remarks? (e.g. technical issues, suggestions for improvement, etc.)', 
+    #                              blank=True
+    # )
     
     blur_event_counts = models.StringField(initial=0, blank=True) # logs how often user clicked out of the page 
 
@@ -75,10 +75,9 @@ class Compet_measure(MyBasePage):
         return variables
     
 # Only for pilot
-#TODO: remove pilot questions before launch
-class Pilot(MyBasePage):
-    extra_fields = ['Pilot_1','Pilot_2','Pilot_3','Pilot_4','Pilot_5']
-    form_fields = MyBasePage.form_fields + extra_fields
+# class Pilot(MyBasePage):
+#     extra_fields = ['Pilot_1','Pilot_2','Pilot_3','Pilot_4','Pilot_5']
+#     form_fields = MyBasePage.form_fields + extra_fields
     
         
-page_sequence = [Compet_measure, Pilot, ]
+page_sequence = [Compet_measure, ]
